@@ -3,15 +3,19 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
+    environment:
+      - PYTHONPATH=/app
     ports:
       - "8000:8000"
     volumes:
-      - ./api:/app
+      - .:/app
     depends_on:
       - mongo
 
   mongo:
-    image: mongo
+    image: mongo:6
+    container_name: mongo
+    restart: always
     ports:
       - "27017:27017"
     volumes:

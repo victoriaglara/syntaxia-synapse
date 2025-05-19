@@ -2,8 +2,10 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY ./api /app
+COPY . /app
 
-RUN pip install fastapi uvicorn
+RUN pip install fastapi uvicorn motor
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+ENV PYTHONPATH=/app
+
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]

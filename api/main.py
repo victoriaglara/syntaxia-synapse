@@ -1,7 +1,6 @@
 from fastapi import FastAPI
+from api.routes import estimulo
 
 app = FastAPI()
 
-@app.get("/estimulo")
-def get_estimulo():
-    return {"mensagem": "Você é capaz. Só precisa dar o primeiro passo."}
+app.include_router(estimulo.router)
