@@ -1,75 +1,126 @@
-# Syntaxia Synapse
+# 🧠 Syntaxia Synapse
 
-**Syntaxia Synapse** is a microlearning platform built with FastAPI, Docker, and MongoDB.  
-It delivers smart educational stimuli via a modular, containerized architecture — serving as a foundation for more complex educational experiments.
+## 🇧🇷 Português
 
-## 🚀 Features
+Uma API REST construída com **FastAPI** e **MongoDB** para gerenciamento de estímulos motivacionais, com suporte a CRUD completo, paginação, testes automatizados e deploy via Docker.
 
-- 🌱 `/estimulo` endpoint: returns a motivational message via FastAPI
-- 🐳 Dockerized setup: FastAPI + MongoDB using Docker Compose
-- 🔌 Easy to run locally with one command
-- 🧱 Ready to scale with more endpoints, database interactions, and background tasks
+### 🚀 Funcionalidades
 
----
+- ✅ Inserção de estímulos (`POST /estimulo`)
+- ✅ Busca aleatória com filtro por tipo (`GET /estimulo?tipo=texto`)
+- ✅ Listagem paginada (`GET /estimulos?skip=0&limit=10`)
+- ✅ Atualização parcial (`PUT /estimulo/{id}`)
+- ✅ Deleção (`DELETE /estimulo/{id}`)
+- ✅ Testes automatizados com `pytest` + `httpx`
+- ✅ Containerização com Docker + Docker Compose
+- ✅ Variáveis de ambiente com `.env`
+- ✅ Pronto para CI com GitHub Actions
 
-## 🛠 Technologies Used
+## 🇺🇸 English
 
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [MongoDB](https://www.mongodb.com/)
-- [Uvicorn](https://www.uvicorn.org/)
+A REST API built with **FastAPI** and **MongoDB** to manage motivational prompts, featuring full CRUD operations, pagination, automated testing, and Docker deployment.
 
----
+### 🚀 Features
 
-## 📁 Project Structure
-
-```
-syntaxia-synapse/
-├── api/
-│   └── main.py                  # FastAPI app with /estimulo route
-├── docker/
-│   └── Dockerfile               # FastAPI container definition
-├── docker-compose.yml          # Orchestrates API and MongoDB containers
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
-```
+- ✅ Add new prompts (`POST /estimulo`)
+- ✅ Fetch random prompt filtered by type (`GET /estimulo?tipo=texto`)
+- ✅ Paginated list (`GET /estimulos?skip=0&limit=10`)
+- ✅ Partial updates (`PUT /estimulo/{id}`)
+- ✅ Deletion (`DELETE /estimulo/{id}`)
+- ✅ Automated tests with `pytest` + `httpx`
+- ✅ Docker + Docker Compose setup
+- ✅ Environment variables with `.env`
+- ✅ Ready for CI with GitHub Actions
 
 ---
 
-## ⚙️ How to Run Locally
+## 🛠️ Tecnologias | Technologies
 
-Make sure you have Docker and Docker Compose installed.
+- Python 3.12+
+- FastAPI
+- MongoDB (Motor async)
+- Docker / Docker Compose
+- Pydantic
+- pytest + httpx
+- python-dotenv
 
-1. Clone this repository:
+---
+
+## 📦 Instalação local | Local setup (no Docker)
+
 ```bash
-git clone https://github.com/victoriaglara/syntaxia-synapse.git
+git clone https://github.com/your-user/syntaxia-synapse.git
 cd syntaxia-synapse
+
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate   # Windows
+
+pip install -r requirements-dev.txt
+cp .env.example .env
+
+uvicorn api.main:app --reload
 ```
 
-2. Run the project:
+Acesse | Access: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 🐳 Docker
+
 ```bash
-docker compose up --build
-```
-
-3. Access in your browser:
-```
-http://localhost:8000/estimulo
+docker-compose up --build
 ```
 
 ---
 
-## 🔮 Next Steps
+## ✅ Testes | Running tests
 
-- [ ] Connect FastAPI to MongoDB using Motor
-- [ ] Serve real motivational content from the database
-- [ ] Add route for posting new stimuli
-- [ ] Include Redis caching and Kafka messaging
-- [ ] Build UI or dashboard for content interaction
+```bash
+pytest
+```
 
 ---
 
-## ✨ About
+## 🧪 .env
 
-This project was created by [victoriaglara](https://github.com/victoriaglara) as a proof of technical ability and as part of a professional application to PUCPR — a place of meaning and purpose.
+```dotenv
+MONGO_URL=mongodb://mongo:27017
+```
 
+---
+
+## 📂 Estrutura | Structure
+
+```
+.
+├── api/
+│   ├── main.py
+│   ├── db/
+│   │   ├── mongo.py
+│   │   └── seed.py
+│   └── routes/
+│       └── estimulo.py
+├── tests/
+│   └── test_estimulo.py
+├── docker-compose.yml
+├── Dockerfile
+├── requirements-dev.txt
+├── .env.example
+└── README.md
+```
+
+---
+
+## 👥 Contribuindo | Contributing
+
+1. Fork
+2. Create a branch
+3. Commit and open a pull request
+
+---
+
+## 📬 Contato | Contact
+
+**Nome | Name:** Victoria Lara  
+**LinkedIn:** [linkedin.com/in/victorialara](https://www.linkedin.com/in/victorialara)
