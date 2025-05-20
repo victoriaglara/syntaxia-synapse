@@ -31,11 +31,17 @@ async def test_put_estimulo():
     payload = {"mensagem": "Antes do update", "tipo": "texto"}
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
         post_response = await ac.post("/estimulo", json=payload)
-        id = post_response.json()["id"]
+        print("POST RESPONSE:", post_response.status_code, post_response.json())
+
+        assert post_response.status_code == 200
+        id = post_response.json().get("id")
 
         update_payload = {"mensagem": "Depois do update"}
         put_response = await ac.put(f"/estimulo/{id}", json=update_payload)
+        print("PUT RESPONSE:", put_response.status_code, put_response.json())
+
         assert put_response.status_code == 200
+        assert put_response.json()["mensagem"] == "Estímulo atualizado com sucesso."
 
 @pytest.mark.asyncio
 async def test_delete_invalid_id():
