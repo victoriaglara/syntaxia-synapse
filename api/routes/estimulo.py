@@ -36,7 +36,7 @@ async def get_estimulo(tipo: Optional[str] = Query(default=None), db=Depends(get
 async def criar_estimulo(est: Estimulo, db=Depends(get_db)):
     collection = db["estimulos"]
     try:
-        result = await collection.insert_one(est.dict())
+        result = await collection.insert_one(est.model_dump())
         return {
             "id": str(result.inserted_id),
             "mensagem": est.mensagem,
