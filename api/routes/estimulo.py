@@ -35,16 +35,9 @@ async def get_estimulo(tipo: Optional[str] = Query(default=None), db=Depends(get
 @router.post("/estimulo")
 async def criar_estimulo(est: Estimulo, db=Depends(get_db)):
     collection = db["estimulos"]
-    try:
-        result = await collection.insert_one(est.model_dump())
-        return {
-            "id": str(result.inserted_id),
-            "mensagem": est.mensagem,
-            "tipo": est.tipo
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
+    result = await collection.insert_one(est.model_dump())  # ✅ compatível com Pydantic v2
+    return {"id": str(result.inserted_id), "mensagem": est.mensagem}
+
 @router.get("/estimulos")
 async def listar_estimulos(
     skip: int = Query(0, ge=0),
